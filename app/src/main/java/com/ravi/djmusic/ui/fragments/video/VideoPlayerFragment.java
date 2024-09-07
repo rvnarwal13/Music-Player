@@ -21,17 +21,11 @@ import java.util.List;
  */
 public class VideoPlayerFragment extends Fragment {
     private VideoView videoView;
-    private MediaController mediaController;
-    private List<MediaFile> videoFiles;
-    private int position = 0;
-
-    public void setMediaController(MediaController mediaController) {
-        this.mediaController = mediaController;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenFragmentTheme);
     }
 
     @Override
@@ -39,14 +33,16 @@ public class VideoPlayerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_video_player, container, false);
-
+        MediaController mediaController = new MediaController(requireContext());
         videoView = view.findViewById(R.id.video_view);
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
 
-        videoFiles = (List<MediaFile>) getArguments().getSerializable("list");
-        position = getArguments().getInt("position");
+        assert getArguments() != null;
+        List<MediaFile> videoFiles = (List<MediaFile>) getArguments().getSerializable("list");
+        int position = getArguments().getInt("position");
 
+        assert videoFiles != null;
         videoView.setVideoURI(Uri.parse(videoFiles.get(position).getPath()));
 
         videoView.setOnPreparedListener(mp -> {
@@ -71,6 +67,4 @@ public class VideoPlayerFragment extends Fragment {
 
         return view;
     }
-
-
 }

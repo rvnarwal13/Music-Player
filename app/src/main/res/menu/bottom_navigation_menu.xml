@@ -9,8 +9,4 @@
         android:id="@+id/action_audio"
         android:icon="@drawable/music_image_light"
         tools:ignore="MenuTitle" />
-    <item
-        android:id="@+id/action_profile"
-        android:icon="@drawable/profile_light"
-        tools:ignore="MenuTitle" />
 </menu>
